@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'scala'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    String scalaVersion = '2.11'
+    String flinkVersion = '1.12.0'
+    implementation "org.apache.flink:flink-streaming-scala_${scalaVersion}:${flinkVersion}"
+    implementation "org.apache.flink:flink-clients_${scalaVersion}:${flinkVersion}"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+project.tasks.compileScala.scalaCompileOptions.additionalParameters = ["-target:jvm-1.8"]
+test {
+    useJUnitPlatform()
+}
